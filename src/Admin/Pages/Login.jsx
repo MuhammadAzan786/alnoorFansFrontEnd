@@ -53,7 +53,7 @@ export default function Login() {
         justifyContent: "center",
         alignItems: "center",
         overflow: "hidden",
-        padding: { xs: 2, sm: 4 },
+        padding: { xs: 1, sm: 2, md: 4 },
       }}
     >
       <Container
@@ -83,7 +83,8 @@ export default function Login() {
               maxWidth: "800px",
               height: "auto",
               maxHeight: "90vh",
-              margin: { xs: 2, sm: 4 }, // Adjusted margin for better responsiveness
+
+              alignItems: "center", // Center items in flex container
             }}
           >
             {/* Image Section */}
@@ -95,6 +96,7 @@ export default function Login() {
                 backgroundImage: `url(${login_img})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
+                height: "100%", // Ensure full height
               }}
             />
             {/* Form Section */}
@@ -105,20 +107,21 @@ export default function Login() {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                padding: { xs: 3, md: 5 },
+                padding: { xs: 2, sm: 3, md: 5 },
+                width: "100%", // Ensure full width
               }}
             >
               <Box
                 sx={{
                   textAlign: "center",
-                  marginBottom: "40px",
+                  marginBottom: "20px",
                 }}
               >
                 <img
                   src={logo}
                   alt="Logo"
                   style={{
-                    height: "80px",
+                    height: "60px",
                     maxWidth: "100%",
                     objectFit: "contain",
                   }}
@@ -140,7 +143,7 @@ export default function Login() {
                           label="Email"
                           variant="outlined"
                           fullWidth
-                          sx={{ marginBottom: 3 }}
+                          sx={{ marginBottom: 2 }} // Adjusted margin for better spacing
                           error={touched.email && Boolean(errors.email)}
                           helperText={
                             touched.email && <ErrorMessage name="email" />
@@ -170,7 +173,7 @@ export default function Login() {
                           label="Password"
                           variant="outlined"
                           fullWidth
-                          sx={{ marginBottom: 3 }}
+                          sx={{ marginBottom: 3 }} // Keep for consistency
                           error={touched.password && Boolean(errors.password)}
                           helperText={
                             touched.password && <ErrorMessage name="password" />
@@ -219,7 +222,13 @@ export default function Login() {
                   mt: 2,
                 }}
               >
-                <Box sx={{ display: "flex" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   <Typography variant="body2">
                     Don't have an account?
                   </Typography>
