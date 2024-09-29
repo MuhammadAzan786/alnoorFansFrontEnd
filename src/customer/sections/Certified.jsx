@@ -1,7 +1,7 @@
 import { Typography, Box } from "@mui/material";
 import React from "react";
 import Zoom from "react-reveal/Zoom"; // Import Zoom from react-reveal
-
+import { certificate } from "../imports";
 const Certified = () => {
   return (
     <Box
@@ -29,7 +29,7 @@ const Certified = () => {
       <Zoom>
         <Box
           component="img"
-          src="/src/customer/images/certificate.jpeg" // Replace with actual image path
+          src={certificate} // Replace with actual image path
           alt="Certification"
           sx={{
             width: { xs: "90%", sm: "70%", md: "50%" }, // Responsive width

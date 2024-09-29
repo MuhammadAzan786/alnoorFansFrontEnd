@@ -23,6 +23,7 @@ import partner1 from "./images/partner1.png";
 import partner2 from "./images/partner2.png";
 import partner3 from "./images/partner3.png";
 import partner4 from "./images/partner4.png";
+import certificate from "./images/certificate.jpeg";
 import factory from "./images/factory.webp";
 import focus from "./images/focus.jpg";
 import listIcon from "./images/list-icon.svg";
@@ -96,6 +97,7 @@ export { default as partner1 } from "./images/partner1.png";
 export { default as partner2 } from "./images/partner2.png";
 export { default as partner3 } from "./images/partner3.png";
 export { default as partner4 } from "./images/partner4.png";
+export { default as certificate } from "./images/certificate.jpeg";
 
 // Icons
 export { FaTruck, FaHeart, FaEye } from "react-icons/fa";
