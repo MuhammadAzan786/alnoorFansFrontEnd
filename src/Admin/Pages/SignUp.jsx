@@ -85,7 +85,7 @@ export default function SignUp() {
           justifyContent: "center",
           alignItems: "center",
           height: "100%",
-          padding: 0,
+          padding: 2,
         }}
       >
         <motion.div
@@ -96,7 +96,7 @@ export default function SignUp() {
           <Box
             sx={{
               backgroundColor: "white",
-              borderRadius: "8px",
+              borderRadius: "0px",
               boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
               overflow: "hidden",
               display: "flex",
@@ -114,7 +114,7 @@ export default function SignUp() {
                 backgroundImage: `url(${signup_img})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                borderRadius: "8px 0 0 8px",
+                borderRadius: "0px",
               }}
             />
 
@@ -125,7 +125,7 @@ export default function SignUp() {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "center",
-                padding: { xs: 4, md: 6 },
+                padding: { xs: 2, md: 6 },
               }}
             >
               <Box
@@ -235,6 +235,7 @@ export default function SignUp() {
                       sx={{
                         backgroundColor: "#0B355B",
                         color: "white",
+                        borderRadius: "0px",
                         paddingX: "40px",
                         marginTop: 4,
                         "&:hover": { backgroundColor: "#54728c" },
