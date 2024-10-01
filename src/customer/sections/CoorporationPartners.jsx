@@ -46,8 +46,6 @@ const CoorporationPartners = () => {
                 style={{
                   width: "200px",
                   height: "auto",
-                  borderRadius: "0px",
-                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
                 }}
               />
             </Box>
