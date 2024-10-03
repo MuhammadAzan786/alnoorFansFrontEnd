@@ -27,13 +27,10 @@ const LastCustomer = ({dateRange}) => {
             <Typography sx={{ mx: 2, mt: 2 }} variant='h6'>
                 Customer Support
             </Typography>
-            <Box sx={{ gridRow: "2/5", display: "flex", alignItems: "center", justifyContent: "center " }}>
+            <Box sx={{ gridRow: "2/5", }}>
             {Array.isArray(messages) ? <Box>
                 <MiniMessageTable  dateRange={dateRange}/>
             </Box> : <ChatIcon sx={{ fontSize: "60px", color: "gray", opacity:0.3 }} />}
-            
- 
-
             </Box>
         </Box>
     )

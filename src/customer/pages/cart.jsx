@@ -114,7 +114,7 @@ const CartPage = () => {
     <>
       <Container maxWidth={"lg"}>
         <div className="mt-[4rem]">
-          <Box sx={{ padding: "40px", fontFamily: "sans-serif" }}>
+          <Box sx={{ padding: "20px 0", fontFamily: "sans-serif" }}>
             <Typography variant="h4" gutterBottom>
               Shopping cart
             </Typography>
@@ -129,34 +129,44 @@ const CartPage = () => {
                       <ListItem
                         key={index}
                         sx={{
+                          display: "flex",
+                          flexDirection: "column",
                           borderBottom: "1px solid #eee",
                           padding: "20px 0",
-                          alignItems: "center", // Align items to center vertically
+                          alignItems: "start",
+                          border: "1px solid #eee",
+                          gap: "10px",
                         }}
                       >
-                        <img
-                          src={item.imageUrl}
-                          style={{
-                            width: "80px",
-                            height: "80px",
-                            marginRight: "20px",
-                          }}
-                        />
-
-                        <Box sx={{ display: "flex", flexDirection: "column" }}>
-                          <Typography variant="subtitle1">
-                            {item.productName}
-                          </Typography>
-                          <Typography
-                            variant="h4"
-                            sx={{
-                              fontSize: 14,
-                              fontWeight: "800",
+                        <Box
+                          sx={{display: "flex", flexDirection: "row", marginLeft: "20px",}}
+                        >
+                          <img
+                            src={item.imageUrl}
+                            style={{
+                              width: "80px",
+                              height: "80px",
+                              marginRight: "20px",
                             }}
+                          />
+                          <Box
+                            sx={{display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", gap: "8px", marginTop: "-18px",}}
                           >
-                            {item.productId.name}
-                          </Typography>
-                          <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <Typography variant="subtitle1">
+                              {item.productName}
+                            </Typography>
+                            <Typography variant="subtitle1">
+                              {item.productName}
+                            </Typography>
+                            <Typography
+                              variant="h4"
+                              sx={{
+                                fontSize: 14,
+                                fontWeight: "800",
+                              }}
+                            >
+                              {item.productId.name}
+                            </Typography>
                             <div></div>
                             <Typography
                               variant="body2"
@@ -191,59 +201,72 @@ const CartPage = () => {
                               {" "}
                             </Box>
                             <div></div>
+                            
+                            <Box
+                              key={index}
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                cursor: "pointer",
+                              }}
+                            ></Box>
                           </Box>
-                          <Box
-                            key={index}
-                            sx={{
-                              display: "flex",
-                              flexDirection: "column",
-                              alignItems: "center",
-                              cursor: "pointer",
-                            }}
-                          ></Box>
                         </Box>
-
                         <Box
                           sx={{
+                            width: { xs: "92%", sm: "94%", md: "96%", },
                             display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
                             alignItems: "center",
-                            marginLeft: "auto", // Push to the right
+                            marginLeft: "20px",
+                            borderTop: "1px solid #eee",
                           }}
                         >
-                          {/* Quantity Controls */}
-                          <IconButton
-                            size="small"
-                            onClick={() =>
-                              handleQuantityChange(
-                                item.productId._id,
-                                item.quantity - 1,
-                                item.type,
-                                item.color
-                              )
-                            }
-                            disabled={item.quantity === 1}
+                          <Box
+                            sx={{
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              justifyContent: "start",
+                            }}
                           >
-                            <RemoveCircleOutlineIcon />
-                          </IconButton>
-                          <Typography variant="body1" sx={{ margin: "0 10px" }}>
-                            {item.quantity}
-                          </Typography>
-                          <IconButton
-                            size="small"
-                            onClick={() =>
-                              handleQuantityChange(
-                                item.productId._id,
-                                item.quantity === item.stock
-                                  ? item.quantity
-                                  : item.quantity + 1,
-                                item.type,
-                                item.color
-                              )
-                            }
-                            disabled={item.quantity === item.stock}
-                          >
-                            <AddCircleOutlineIcon />
-                          </IconButton>
+                            {/* Quantity Controls */}
+                            <IconButton
+                              size="small"
+                              onClick={() =>
+                                handleQuantityChange(
+                                  item.productId._id,
+                                  item.quantity - 1,
+                                  item.type,
+                                  item.color
+                                )
+                              }
+                              disabled={item.quantity === 1}
+                            >
+                              <RemoveCircleOutlineIcon />
+                            </IconButton>
+                            <Typography variant="body1" sx={{ margin: "0 10px" }}>
+                              {item.quantity}
+                            </Typography>
+                            <IconButton
+                              size="small"
+                              onClick={() =>
+                                handleQuantityChange(
+                                  item.productId._id,
+                                  item.quantity === item.stock
+                                    ? item.quantity
+                                    : item.quantity + 1,
+                                  item.type,
+                                  item.color
+                                )
+                              }
+                              disabled={item.quantity === item.stock}
+                            >
+                              <AddCircleOutlineIcon />
+                            </IconButton>
+                          </Box>
 
                           {/* Remove Item Button */}
                           <IconButton
@@ -260,6 +283,7 @@ const CartPage = () => {
                             <DeleteOutlineIcon />
                           </IconButton>
                         </Box>
+
 
                         {/* Item Total Price */}
                         <Typography

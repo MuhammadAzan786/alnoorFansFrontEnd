@@ -60,7 +60,7 @@ const OrderDetailsPage = () => {
   return (
     <>
       <Box
-        px={{ xs: 1, sm: 2, md: 3 }}
+        px={{ xs: 2, sm: 2, md: 3 }}
         maxWidth="900px"
         mx="auto"
         sx={{ py: 11 }}
@@ -68,8 +68,10 @@ const OrderDetailsPage = () => {
         <Box
           sx={{
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "start",
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: { xs: "center", md: "space-between" },
+            alignItems: { xs: "center", md: "flex-start" },
+            marginBottom: { xs: "32px", md: "0px" },
           }}
         >
           <Box>
