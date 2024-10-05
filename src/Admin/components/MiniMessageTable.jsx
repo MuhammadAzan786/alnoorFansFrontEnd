@@ -4,36 +4,130 @@ import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMessages } from "../../redux/Slices/messageSlice";
 import Loading from "./Loading";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 
-// Define columns based on your new data structure
+// Define columns with hover popover
 const columns = [
-  // { field: "id", headerName: "#", width: 80 },
-  { field: "idz", headerName: "#", width: 80 },
-  { field: "name", headerName: "Name", width: 100 },
+  {
+    field: "idz",
+    headerName: "#",
+    width: 80,
+    renderCell: (params) => <HoverableCell params={params} field="idz" />,
+  },
+  {
+    field: "name",
+    headerName: "Name",
+    width: 100,
+    renderCell: (params) => <HoverableCell params={params} field="name" />,
+  },
   {
     field: "subject",
     headerName: "Subject",
-    width: 150,
-    renderCell: (params) => (
+    width: 400,
+    renderCell: (params) => <HoverableCell params={params} field="subject" />,
+  },
+];
+
+const HoverableCell = ({ params, field }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [messageDetails, setMessageDetails] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handlePopoverOpen = async (event) => {
+    setAnchorEl(event.currentTarget);
+    setLoading(true);
+
+    // Fetch message details by ID
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_DOMAIN_NAME}/api/contact/messages/${params.row.id}`
+      );
+      if (!response.ok) throw new Error("Failed to fetch message details");
+      const data = await response.json();
+      setMessageDetails(data.data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+
+  return (
+    <>
       <Box
+        component="span"
         sx={{
-          whiteSpace: "nowrap",
+          display: "block",
           overflow: "hidden",
           textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
         }}
+        aria-owns={open ? "mouse-over-popover" : undefined}
+        aria-haspopup="true"
+        onMouseEnter={handlePopoverOpen}
+        onMouseLeave={handlePopoverClose}
       >
         {params.value}
       </Box>
-    ),
-  },
-];
+      <Popover
+        id="mouse-over-popover"
+        sx={{
+          pointerEvents: "none",
+        }}
+        open={open}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
+      >
+        <Box sx={{ p: 2 }}>
+          {loading ? (
+            <Typography>Loading...</Typography>
+          ) : error ? (
+            <Typography color="error">{error}</Typography>
+          ) : (
+            <Box>
+              <Typography variant="subtitle2">
+                Received On:{" "}
+                {new Date(messageDetails.createdAt).toLocaleDateString()}
+              </Typography>
+              <Typography variant="subtitle2">
+                Email: {messageDetails.email}
+              </Typography>
+              <Typography variant="subtitle2">
+                Phone: {messageDetails.phone}
+              </Typography>
+              <Typography variant="subtitle2" sx={{ whiteSpace: "pre-line" }}>
+                Message: {messageDetails.message}
+              </Typography>
+            </Box>
+          )}
+        </Box>
+      </Popover>
+    </>
+  );
+};
 
 const MiniMessageTable = ({ dateRange }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
-
   const { data, isLoading, isError } = useSelector((state) => state.messages);
 
   useEffect(() => {
@@ -60,8 +154,7 @@ const MiniMessageTable = ({ dateRange }) => {
         <Loading />
       </div>
     );
-  if (isError) return <div>Error fetching messages</div>;
-
+  
   const handleRowClick = (params) => {
     const messageId = params.row.id;
     navigate(`/admin/message-page/${messageId}`);
@@ -69,7 +162,7 @@ const MiniMessageTable = ({ dateRange }) => {
 
   // Format data to fit DataGrid structure
   const rows = messages.map((item, index) => ({
-    idz:index + 1,
+    idz: index + 1,
     id: item._id,
     name: item.name,
     subject: item.subject,
@@ -80,12 +173,12 @@ const MiniMessageTable = ({ dateRange }) => {
       <DataGrid
         rows={rows}
         columns={columns}
-        pageSize={2} 
+        pageSize={2}
         getRowId={(row) => row.id}
         onRowClick={handleRowClick}
         disableRowSelectionOnClick
-        pagination={false} 
-        hideFooter={true} 
+        pagination={false}
+        hideFooter={true}
         sx={{
           "& .MuiDataGrid-columnHeader": {
             backgroundColor: "#e7edf3",

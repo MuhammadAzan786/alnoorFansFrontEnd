@@ -133,7 +133,7 @@ const CheckoutPage = () => {
   return (
     <>
       <Container maxWidth="lg" sx={{ paddingY: "80px" }}>
-        <Box padding={4}>
+        <Box padding="16px">
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={4}>
               <Grid item xs={12} md={6}>

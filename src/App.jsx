@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SideNav from "./Admin/components/SideNav.jsx";
-
+import ScrollToTop from "./customer/components/ScrolltoTop.jsx";
 // Pages
 import Dashboard from "./Admin/Pages/Dashboard.jsx";
 import AllProducts from "./Admin/Pages/Products/AllProducts.jsx";
@@ -50,74 +50,76 @@ export default function App() {
   const user = useSelector((state) => state.Singleuser);
 
   return (
-    <Routes>
-      {/* Public Routes */}
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/forgotPass" element={<ForgotPassword />} />
-      <Route path="/emailverification" element={<EmailVerificationPage />} />
-      <Route
-        path="/verificationEmailResend"
-        element={<VerificationEmailResend />}
-      />
-      <Route path="/reset-password/:token" element={<UpdatePasswordPage />} />
-      <Route
-        path="/resetpasswordrequest"
-        element={<ResetpasswordEmailSentPage />}
-      />
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="categories" element={<CategoriesPage />} />
-        <Route path="uniqueproducts/:id" element={<UniqueProducts />} />
-        <Route path="order-details/:id" element={<OrderDetailsPage />} />
-        <Route path="products" element={<Products />} />
-        <Route path="term" element={<TermsAndConditions />} />
+    <>
+      <ScrollToTop /> {/* Add ScrollToTop here */}
+      <Routes>
+        {/* Public Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgotPass" element={<ForgotPassword />} />
+        <Route path="/emailverification" element={<EmailVerificationPage />} />
         <Route
-          path="products/product/:id"
-          element={<CustomerProductDetail />}
+          path="/verificationEmailResend"
+          element={<VerificationEmailResend />}
         />
-        <Route path="cart" element={<CartPage />} />
-        <Route path="checkout" element={<CheckoutPage />} />
-      </Route>
+        <Route path="/reset-password/:token" element={<UpdatePasswordPage />} />
+        <Route
+          path="/resetpasswordrequest"
+          element={<ResetpasswordEmailSentPage />}
+        />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="categories" element={<CategoriesPage />} />
+          <Route path="uniqueproducts/:id" element={<UniqueProducts />} />
+          <Route path="order-details/:id" element={<OrderDetailsPage />} />
+          <Route path="products" element={<Products />} />
+          <Route path="term" element={<TermsAndConditions />} />
+          <Route
+            path="products/product/:id"
+            element={<CustomerProductDetail />}
+          />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
+        </Route>
 
-      {/* Protected Routes (Based on role) */}
-      {user.data?.role === "admin" ? (
-        <>
-          <Route path="/admin" element={<SideNav />}>
-            <Route index element={<Dashboard />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="allproduct" element={<AllProducts />} />
-            <Route path="addproduct/" element={<AddProduct />} />
-            <Route path="categories" element={<CategoryPage />} />
-            <Route path="editproduct/:id" element={<EditProduct />} />
-            <Route path="editcategory/:id" element={<Editcategory />} />
-            <Route path="order-details/:id" element={<OrderDetailsPage />} />
-            <Route path="invoice/:id" element={<Invoice />} />
-            <Route path="edit-stock/:id" element={<EditStock />} />
-            <Route path="message-page/:id" element={<MessagePage />} />
-            <Route path="orders" element={<Orders />} />
+        {/* Protected Routes (Based on role) */}
+        {user.data?.role === "admin" ? (
+          <>
+            <Route path="/admin" element={<SideNav />}>
+              <Route index element={<Dashboard />} />
+              <Route path="dashboard" element={<Dashboard />} />
+              <Route path="allproduct" element={<AllProducts />} />
+              <Route path="addproduct/" element={<AddProduct />} />
+              <Route path="categories" element={<CategoryPage />} />
+              <Route path="editproduct/:id" element={<EditProduct />} />
+              <Route path="editcategory/:id" element={<Editcategory />} />
+              <Route path="order-details/:id" element={<OrderDetailsPage />} />
+              <Route path="invoice/:id" element={<Invoice />} />
+              <Route path="edit-stock/:id" element={<EditStock />} />
+              <Route path="message-page/:id" element={<MessagePage />} />
+              <Route path="orders" element={<Orders />} />
+              <Route path="stock" element={<Stock />} />
+              <Route path="messages" element={<Messages />} />
+              <Route path="customers" element={<Customers />} />
+              <Route path="addbanner" element={<AddBanner />} />
+              <Route
+                path="customerOrderHistoryPage/:id"
+                element={<CustomerOrderHistoryPage />}
+              />
+              <Route path="addcategory" element={<AddCategoryForm />} />
+              <Route path="productdetails/:id" element={<ProductDetails />} />
+            </Route>
 
-            <Route path="stock" element={<Stock />} />
-            <Route path="messages" element={<Messages />} />
-            <Route path="customers" element={<Customers />} />
-            <Route path="addbanner" element={<AddBanner/>}/>
-            <Route
-              path="customerOrderHistoryPage/:id"
-              element={<CustomerOrderHistoryPage />}
-            />
-            <Route path="addcategory" element={<AddCategoryForm />} />
-            <Route path="productdetails/:id" element={<ProductDetails />} />
-          </Route>
-
-          {/* Catch-all for authenticated users (if needed) */}
+            {/* Catch-all for authenticated users (if needed) */}
+            <Route path="*" element={<NotFound />} />
+          </>
+        ) : (
+          // Public Route (Login)
           <Route path="*" element={<NotFound />} />
-        </>
-      ) : (
-        // Public Route (Login)
-        <Route path="*" element={<NotFound />} />
-      )}
-    </Routes>
+        )}
+      </Routes>
+    </>
   );
 }
