@@ -8,6 +8,7 @@ import MiniMessageTable from "./MiniMessageTable.jsx";
 
 const LastCustomer = ({ dateRange }) => {
   const [messages, setMessages] = useState([]);
+  const [loadingMessages, setLoadingMessages] = useState(false);
   // Fetch messages directly from the API when the component mounts
   useEffect(() => {
     const fetchMessagesDirectly = async () => {
