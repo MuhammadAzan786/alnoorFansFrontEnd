@@ -254,7 +254,7 @@ const CheckoutPage = () => {
                         fullWidth
                         required
                         margin="normal"
-                        label="Pin Code"
+                        label="Postal Code"
                         name="pinCode"
                         value={formik.values.pinCode}
                         onChange={formik.handleChange}

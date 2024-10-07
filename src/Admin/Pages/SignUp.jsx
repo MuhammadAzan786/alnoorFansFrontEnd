@@ -56,13 +56,26 @@ export default function SignUp() {
           }, 1000);
         } else {
           setLoading(false);
-          toast.error("Registration failed. Please try again.");
+          toast.error(
+            res.data.message || "Registration failed. Please try again."
+          );
         }
       })
       .catch((error) => {
-        console.error("Error Message:", error.message);
-        toast.error("Registration failed. Please try again.");
+        setLoading(false);
         setSubmitting(false);
+
+        // Check if error has a response from the server
+        if (error.response && error.response.data) {
+          // Display the server's error message if available
+          const errorMessage =
+            error.response.data.message ||
+            "An error occurred. Please try again.";
+          toast.error(errorMessage);
+        } else {
+          // Fallback for any other error (e.g., network issues)
+          toast.error(error.message || "An error occurred. Please try again.");
+        }
       });
   };
 
