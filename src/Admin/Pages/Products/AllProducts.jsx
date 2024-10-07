@@ -33,19 +33,30 @@ const AllProducts = () => {
     );
   };
 
-  const state = useSelector((state) => state.products);
-  useEffect(() => {
-    if (state.data) {
-      setProducts(state.data.products);
-      console.log(state.data.products);
-    }
-  }, [state.data]);
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Fetch products directly from the API
   useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(
+          `${
+            import.meta.env.VITE_BACKEND_DOMAIN_NAME
+          }/api/product/getProductsWithoutfilter`
+        ); // Replace with your actual API endpoint
+        setProducts(response.data); // Adjust depending on the API structure
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setIsLoading(false); // Set loading to false after fetching is done
+      }
+    };
 
-  if (state.isLoading) {
+    fetchProducts();
+  }, []); // Empty dependency array ensures the API call is made once on component mount
+
+  // Handle loading state
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center w-full min-h-screen">
         <Loading />

@@ -16,9 +16,9 @@ const CoorporationPartners = () => {
             sx={{
               fontSize: {
                 lg: "2.3rem",
-                md: "2.2rem",
-                sm: "1.9rem",
-                xs: "1.8rem",
+                md: "2.0rem",
+                sm: "1.7rem",
+                xs: "1.6rem",
               },
               fontWeight: "bold",
             }}

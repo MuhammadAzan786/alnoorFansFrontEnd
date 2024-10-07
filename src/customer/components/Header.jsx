@@ -64,6 +64,7 @@ const navItemsAfterLogin = [
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const user = useSelector((state) => state.Singleuser);
 
   const navigate = useNavigate();
@@ -183,18 +184,19 @@ const Header = () => {
     <Box sx={{ display: "flex", flexGrow: 1, overflowY: "auto" }}>
       <CssBaseline />
       <AppBar
+        position="static"
         component="nav"
         sx={{
           backgroundColor: scrolled ? "#fff" : "transparent",
           transition: "background-color 0.3s ease",
-          boxShadow: scrolled ? 4 : "none",
+          boxShadow: scrolled ? 2 : "none",
         }}
       >
-        <Container>
+        <Container sx={{ paddingX: { xs: 0, sm: 0, md: 2 } }}>
           <Toolbar
             sx={{
               justifyContent: "space-between",
-              paddingY: { xs: 1, sm: 2 },
+              paddingY: { xs: 1, sm: 1 },
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -222,21 +224,22 @@ const Header = () => {
                   fontWeight: 600,
                   color: "black", // Adjusted to white for better contrast
                 }}
-              >
-                <Box
-                  component="img"
-                  src={logo}
-                  alt="Logo"
-                  sx={{
-                    width: 100, // Maximum width
-                    display: { xs: "none", sm: "none", md: "block" }, // Hide on small screens and up
-                    maxWidth: "100%",
-                  }}
-                  className="w-28"
-                />
-              </Typography>
+              ></Typography>
             </Box>
-
+            <Box>
+              <Box
+                component="img"
+                src={logo}
+                alt="Logo"
+                sx={{
+                  marginLeft: { xs: "30px", sm: "35px", md: "45px", lg: "0px" },
+                  width: { xs: 70, sm: 80, md: 90, lg: 90 }, // Maximum width
+                  display: { xs: "block", sm: "block", md: "block" }, // Hide on small screens and up
+                  maxWidth: "100%",
+                }}
+                className="w-28"
+              />
+            </Box>
             <Box
               sx={{
                 display: { xs: "none", md: "flex" },
@@ -320,6 +323,7 @@ const Header = () => {
                   aria-controls="account-menu"
                   aria-haspopup="true"
                   onClick={handleMenuOpen}
+                  sx={{ padding: 0 }}
                 >
                   <Tooltip title={user?.data?.username}>
                     <IconButton onClick={handleMenuOpen}>

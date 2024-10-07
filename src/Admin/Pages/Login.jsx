@@ -75,28 +75,24 @@ export default function Login() {
             sx={{
               backgroundColor: "white",
               borderRadius: "0px",
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+              boxShadow: "0px 8px 20px rgba(0, 0, 0, 0.2)",
               overflow: "hidden",
               display: "flex",
               flexDirection: { xs: "column", md: "row" },
               width: "100%",
               maxWidth: "800px",
-              height: "auto",
               maxHeight: "90vh",
-
-              alignItems: "center", // Center items in flex container
             }}
           >
             {/* Image Section */}
             <Box
+              className="Hello"
               sx={{
                 display: { xs: "none", md: "block" },
                 flex: "1",
                 overflow: "hidden",
-                backgroundImage: `url(${login_img})`,
+                background: `url(${login_img}) center center no-repeat`,
                 backgroundSize: "cover",
-                backgroundPosition: "center",
-                height: "100%", // Ensure full height
               }}
             />
             {/* Form Section */}

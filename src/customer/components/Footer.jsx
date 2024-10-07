@@ -24,7 +24,7 @@ const Footer = () => {
                   </Link>
                 </Box>
                 <Typography className="text" variant="body2" mt={2}>
-                  Since its establishement in 1975, Al Noor FansTM is recognized
+                  Since its establishement in 1975, Al Noor Fans<sup>TM</sup> is recognized
                   as a symbol of Quality & Excellence in the National market. We
                   are an ISO 9001:2008 certified company with all our production
                   processes benchmarked as per the highest International
@@ -119,23 +119,21 @@ const Footer = () => {
                 </Box>
                 <ul className="social-links" style={{ marginTop: "20px" }}>
                   <li>
-                    <Link href="#">
+                    <Link
+                      href="https://www.facebook.com/alnoorfans?mibextid=ZbWKwL"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <FacebookIcon />
                     </Link>
                   </li>
                   <li>
-                    <Link href="#">
-                      <TwitterIcon />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <XIcon />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="#">
-                      <InstagramIcon />
+                    <Link
+                      href="https://x.com/alnoorfan?s=09"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <XIcon /> {/* X is now Twitter */}
                     </Link>
                   </li>
                 </ul>
@@ -154,7 +152,7 @@ const Footer = () => {
                 <Typography variant="body2" color="inherit">
                   Copyright © 2024 Al-Noor Fans<sup>TM</sup>
                   <Link target="_blank" color="inherit"></Link> - All Rights
-                  Reserved. Developed by Vision Bird Technologies
+                  Reserved. Developed by Muhammad Azan Afzal
                 </Typography>
               </Box>
             </Grid>

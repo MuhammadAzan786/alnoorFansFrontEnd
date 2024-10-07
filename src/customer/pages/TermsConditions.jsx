@@ -262,7 +262,7 @@ const TermsAndConditions = () => {
                     If you haven’t received a refund yet, first check your bank
                     account, then contact your bank. There may be a processing
                     delay. If you still have not received your refund, please
-                    contact us at <Link href="tel:+000000000">+000000000</Link>.
+                    contact us at <Link href="+92 053 3530447">+92 053 3530447</Link>.
                   </Typography>
                 </AccordionDetails>
               </Accordion>
@@ -486,7 +486,7 @@ const TermsAndConditions = () => {
               </Typography>
               <Typography variant="body2">
                 Contact us at{" "}
-                <Link href="mailto:******@company.com">******@company.com</Link>{" "}
+                <Link href="+92 053 3530447">+92 053 3530447</Link>{" "}
                 for any questions related to refunds and returns.
               </Typography>
             </Box>
